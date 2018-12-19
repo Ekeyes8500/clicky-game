@@ -5,6 +5,7 @@ import './App.css';
 
 let pickedArray = [];
 let score = 0;
+let topScore = 0;
 
 function importAll(r) {
   return r.keys().map(r);
@@ -31,6 +32,7 @@ class App extends Component {
   state = {
     images:[],
     score:0,
+    topScore:0,
     instructions:"Select a character to begin!"
   }
 
@@ -52,6 +54,10 @@ class App extends Component {
     pickedArray.push(name);
     imageImport.shuffle();
     score++;
+    if (score > topScore){
+      topScore++;
+      this.setState({topScore:topScore})
+    }
     this.setState({
       images:imageImport,
       score:score,
@@ -71,6 +77,7 @@ class App extends Component {
           <Navbar
           instructions={this.state.instructions}
           score={this.state.score}
+          topScore={this.state.topScore}
           />
           <div className="container">
             <div className="card-columns">
